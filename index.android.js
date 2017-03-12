@@ -13,9 +13,17 @@ import {
   Text,
   View
 } from 'react-native';
+import SendSMS from 'react-native-sms'
 
 const onButtonPress = () => {
   Alert.alert('Sending an SMS to Keith!');
+  SendSMS.send({
+    body: 'I farted',
+    recipients: ['3472863315', '6028036876'],
+    successTypes: ['sent', 'queued']
+  }, (completed, cancelled, error) => {
+    Alert.alert(`SMS Callback: completed: ${completed} cancelled: ${cancelled} error: ${error}`);
+  });
 };
 
 export default class dharmaride extends Component {
@@ -27,7 +35,7 @@ export default class dharmaride extends Component {
         </Text>
         <Button
           onPress={onButtonPress}
-          title="SMS Keith"
+          title="Send SMS"
           color="#DEB887"
           accessibilityLabel="Learn more about purple"
         />
